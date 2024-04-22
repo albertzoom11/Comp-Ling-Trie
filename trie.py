@@ -7,6 +7,9 @@ class Trie:
     def add(self, word):
         if len(word) == 0:
             return "\"" + word + "\" is not a valid word to add to the trie."
+        
+        if " " in word:
+            return "Please enter only one word."
 
         if (self.search(word) == "\"" + word + "\" is a word in the trie."):
             return "\"" + word + "\" is already in the trie."
