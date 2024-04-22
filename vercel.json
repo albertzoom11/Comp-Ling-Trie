@@ -6,7 +6,7 @@
       "use": "@vercel/python"
     }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/templates/index" }
+  "routes": [
+    {"src": "/(.*)", "dest": "app.py"}
   ]
 }
