@@ -37,7 +37,8 @@
 
     <script>
         function addWord() {
-            var word = document.getElementById("word-input").value.toLowerCase();
+            var wordInput = document.getElementById("word-input");
+            var word = wordInput.value.toLowerCase();
             fetch('/add_word', {
                 method: 'POST',
                 headers: {
@@ -48,6 +49,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("message").innerText = data.result;
+                wordInput.value = "";
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -55,7 +57,8 @@
         }
 
         function addWords() {
-            var words = document.getElementById("word-list-input").value.toLowerCase().split(" ");
+            var wordListInput = document.getElementById("word-list-input");
+            var words = wordListInput.value.toLowerCase().split(" ");
             fetch('/add_words', {
                 method: 'POST',
                 headers: {
@@ -66,6 +69,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("message").innerText = data.result;
+                wordListInput.value = "";
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -73,7 +77,8 @@
         }
 
         function removeWord() {
-            var word = document.getElementById("remove-word-input").value.toLowerCase();
+            var removeWordInput = document.getElementById("remove-word-input");
+            var word = removeWordInput.value.toLowerCase();
             fetch('/remove_word', {
                 method: 'POST',
                 headers: {
@@ -84,6 +89,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("message").innerText = data.result;
+                removeWordInput.value = "";
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -91,7 +97,8 @@
         }
 
         function searchWord() {
-            var word = document.getElementById("search-input").value.toLowerCase();
+            var searchWordInput = document.getElementById("search-input");
+            var word = searchWordInput.value.toLowerCase();
             fetch('/search_word', {
                 method: 'POST',
                 headers: {
@@ -102,6 +109,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("message").innerText = data.result;
+                searchWordInput.value = "";
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -109,7 +117,8 @@
         }
 
         function prefixMatch() {
-            var prefix = document.getElementById("prefix-input").value.toLowerCase();
+            var prefixInput = document.getElementById("prefix-input");
+            var prefix = prefixInput.value.toLowerCase();
             fetch('/prefix_match', {
                 method: 'POST',
                 headers: {
@@ -120,6 +129,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("message").innerText = data.result;
+                prefixInput.value = "";
             })
             .catch(error => {
                 console.error('Error:', error);
