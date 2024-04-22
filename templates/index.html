@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trie Operations</title>
+</head>
+<body>
+    <h1>Trie Operations</h1>
+    
+    <button onclick="addWord()">Add a Word</button>
+    <input type="text" id="word-input" placeholder="Enter a word">
+    <br>
+    
+    <button onclick="addWords()">Add List of Words</button>
+    <input type="text" id="word-list-input" placeholder="Enter words separated by commas">
+    <br>
+    
+    <button onclick="removeWord()">Remove a Word</button>
+    <input type="text" id="remove-word-input" placeholder="Enter a word to remove">
+    <br>
+    
+    <button onclick="searchWord()">Search for a Word</button>
+    <input type="text" id="search-input" placeholder="Enter a word">
+    <br>
+
+    <button onclick="prefixMatch()">Prefix Match</button>
+    <input type="text" id="prefix-input" placeholder="Enter a prefix">
+    <br>
+
+    <button onclick="displayTrie()">Display Trie</button>
+    <div id="trie-display"></div>
+    <br>
+    <br>
+
+    <label id="message"></label>
+
+    <script>
+        function addWord() {
+            var word = document.getElementById("word-input").value.toLowerCase();
+            fetch('/add_word', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({word: word})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function addWords() {
+            var words = document.getElementById("word-list-input").value.toLowerCase().split(" ");
+            fetch('/add_words', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({words: words})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function removeWord() {
+            var word = document.getElementById("remove-word-input").value.toLowerCase();
+            fetch('/remove_word', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({word: word})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function searchWord() {
+            var word = document.getElementById("search-input").value.toLowerCase();
+            fetch('/search_word', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({word: word})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function prefixMatch() {
+            var prefix = document.getElementById("prefix-input").value.toLowerCase();
+            fetch('/prefix_match', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({prefix: prefix})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function displayTrie() {
+            fetch('/display_trie')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.result;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

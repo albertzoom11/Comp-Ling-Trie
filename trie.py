@@ -19,6 +19,10 @@ class Trie:
         return "\"" + word + "\" has been added to the trie."
     
     def addList(self, words):
+        if len(words) == 0 or len(words) == 1 and words[0] == "":
+            return "No words were inputted."
+        if len(words) == 1:
+            return self.add(words[0])
         added, notAdded = 0, 0
         for word in words:
             result = self.add(word)
