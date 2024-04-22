@@ -1,5 +1,4 @@
 # Python trie class used to store nodes in the data structure with methods to allow customization and access
-# HackerRank video referenced to understand tries: https://www.youtube.com/watch?v=zIjfhVPRZCg
 class Trie:
     def __init__(self):
         self.root = Node(True)
@@ -18,6 +17,16 @@ class Trie:
             current = current.children[char]
         current.isWord = True
         return "\"" + word + "\" has been added to the trie."
+    
+    def addList(self, words):
+        added, notAdded = 0, 0
+        for word in words:
+            result = self.add(word)
+            if result == "\"" + word + "\" has been added to the trie.":
+                added += 1
+            else:
+                notAdded += 1
+        return str(added) + "/" + str(added + notAdded) + " words were successfully added to the trie."
 
 
     def delete(self, word):
@@ -71,11 +80,11 @@ class Trie:
         output += [prefix + suffix for suffix in self.listWords(current)]
         if output == [prefix]:
             return "The only word with the prefix \"" + prefix + "\" is \"" + prefix + "\"."
-        return "Autocomplete suggestions list for the prefix \"" + prefix + "\": " + str(output)
+        outputString = ""
+        for s in output:
+            outputString += "\n" + s
+        return "Autocomplete suggestions for the prefix \"" + prefix + "\": " + outputString
 
-    # Stack Overflow reference on recursive function for listing words in trie: 
-    # https://stackoverflow.com/questions/36977439/python-trie-how-to-traverse-it-to-build-list-of-all-words
-    # I implemented different conditioning to follow the attributes and constraints of my Node class.
     def listWords(self, trie):
         output = []
         for letter, node in trie.children.items():
